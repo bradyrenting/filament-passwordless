@@ -2,11 +2,11 @@
 
 namespace BradyRenting\FilamentPasswordless\Tests;
 
+use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
 use Filament\FilamentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
 
 class TestCase extends Orchestra
 {

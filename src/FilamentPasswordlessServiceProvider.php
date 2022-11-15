@@ -1,13 +1,13 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace BradyRenting\FilamentPasswordless;
 
 use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 
-class SkeletonServiceProvider extends PluginServiceProvider
+class FilamentPasswordlessServiceProvider extends PluginServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filament-passwordless';
 
     protected array $resources = [
         // CustomResource::class,
@@ -22,15 +22,15 @@ class SkeletonServiceProvider extends PluginServiceProvider
     ];
 
     protected array $styles = [
-        'plugin-skeleton' => __DIR__.'/../resources/dist/skeleton.css',
+        'plugin-filament-passwordless' => __DIR__.'/../resources/dist/filament-passwordless.css',
     ];
 
     protected array $scripts = [
-        'plugin-skeleton' => __DIR__.'/../resources/dist/skeleton.js',
+        'plugin-filament-passwordless' => __DIR__.'/../resources/dist/filament-passwordless.js',
     ];
 
     // protected array $beforeCoreScripts = [
-    //     'plugin-skeleton' => __DIR__ . '/../resources/dist/skeleton.js',
+    //     'plugin-filament-passwordless' => __DIR__ . '/../resources/dist/filament-passwordless.js',
     // ];
 
     public function configurePackage(Package $package): void

@@ -1,6 +1,6 @@
 {
     "name": "bradyrenting/filament-passwordless",
-    "description": "Filament plugin for passwordless authentication",
+    "description": "Passwordless authentication for Filament",
     "keywords": [
         "bradyrenting",
         "laravel",

@@ -1,4 +1,4 @@
-# Filament plugin for passwordless authentication
+# Passwordless Authentication for Filament
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bradyrenting/filament-passwordless.svg?style=flat-square)](https://packagist.org/packages/bradyrenting/filament-passwordless)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bradyrenting/filament-passwordless/run-tests?label=tests)](https://github.com/bradyrenting/filament-passwordless/actions?query=workflow%3Arun-tests+branch%3Amain)

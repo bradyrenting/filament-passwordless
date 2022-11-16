@@ -3,6 +3,8 @@
 namespace BradyRenting\FilamentPasswordless;
 
 use Filament\PluginServiceProvider;
+use BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 
 class FilamentPasswordlessServiceProvider extends PluginServiceProvider
@@ -32,6 +34,13 @@ class FilamentPasswordlessServiceProvider extends PluginServiceProvider
     // protected array $beforeCoreScripts = [
     //     'plugin-filament-passwordless' => __DIR__ . '/../resources/dist/filament-passwordless.js',
     // ];
+
+    public function packageBooted(): void
+    {
+        parent::packageBooted();
+
+        Livewire::component(Auth\Login::getName(), Auth\Login::class);
+    }
 
     public function configurePackage(Package $package): void
     {

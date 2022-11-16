@@ -1,6 +1,8 @@
 <?php
 
-// config for BradyRenting/FilamentPasswordless
 return [
-
+    /**
+     * The authentication model.
+     */
+    'authenticable_model' => \App\Models\User::class,
 ];

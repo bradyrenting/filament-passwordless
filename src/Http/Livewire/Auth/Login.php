@@ -2,7 +2,6 @@
 
 namespace BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
 
-use BradyRenting\FilamentPasswordless\Actions\SendMagicLink;
 use BradyRenting\FilamentPasswordless\FilamentPasswordless;
 use BradyRenting\FilamentPasswordless\MagicLink;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
@@ -13,11 +12,9 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
-use Livewire\Livewire;
 
 /**
  * @property ComponentContainer $form
@@ -57,7 +54,7 @@ class Login extends Component implements HasForms
 
         $model = app(FilamentPasswordless::class)->getAuthenticatableModel($data['email']);
 
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $url = MagicLink::create($model, $data['remember'])->getUrl();
 
             // Send the magic link via email

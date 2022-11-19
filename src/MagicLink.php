@@ -38,7 +38,7 @@ class MagicLink
             name: 'filament.auth.login.magic-link',
             expiration: now()->addMinutes(config('filament-passwordless.expires_after')),
             parameters: [
-                'model'  => $this->model->getRouteKey(),
+                'model' => $this->model->getRouteKey(),
                 'remember' => $this->remember,
             ]
         );

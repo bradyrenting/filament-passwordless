@@ -2,7 +2,6 @@
 
 namespace BradyRenting\FilamentPasswordless\Notifications;
 
-use BradyRenting\FilamentPasswordless\FilamentPasswordless;
 use BradyRenting\FilamentPasswordless\MagicLink;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

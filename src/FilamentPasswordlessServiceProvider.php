@@ -44,6 +44,10 @@ class FilamentPasswordlessServiceProvider extends PluginServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name(static::$name);
+        $package
+            ->name(static::$name)
+            ->hasViews()
+            ->hasConfigFile()
+            ->hasRoute('web');
     }
 }

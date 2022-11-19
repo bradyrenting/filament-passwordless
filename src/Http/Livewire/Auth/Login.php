@@ -2,6 +2,9 @@
 
 namespace BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
 
+use BradyRenting\FilamentPasswordless\Actions\SendMagicLink;
+use BradyRenting\FilamentPasswordless\FilamentPasswordless;
+use BradyRenting\FilamentPasswordless\MagicLink;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Facades\Filament;
@@ -14,6 +17,7 @@ use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Livewire\Livewire;
 
 /**
  * @property ComponentContainer $form
@@ -23,9 +27,9 @@ class Login extends Component implements HasForms
     use InteractsWithForms;
     use WithRateLimiting;
 
-    public string $email = '';
+    public $email = '';
 
-    public bool $remember = false;
+    public $remember = false;
 
     public function mount(): void
     {
@@ -36,7 +40,7 @@ class Login extends Component implements HasForms
         $this->form->fill();
     }
 
-    public function authenticate(): ?LoginResponse
+    public function authenticate()
     {
         try {
             $this->rateLimit(5);
@@ -51,18 +55,15 @@ class Login extends Component implements HasForms
 
         $data = $this->form->getState();
 
-        if (! Filament::auth()->attempt([
-            'email' => $data['email'],
-            'password' => $data['password'],
-        ], $data['remember'])) {
-            throw ValidationException::withMessages([
-                'email' => __('filament::login.messages.failed'),
-            ]);
+        $model = app(FilamentPasswordless::class)->getAuthenticatableModel($data['email']);
+
+        if (!is_null($model)) {
+            $url = MagicLink::create($model, $data['remember'])->getUrl();
+
+            // Send the magic link via email
         }
 
-        session()->regenerate();
-
-        return app(LoginResponse::class);
+        // Return to view...
     }
 
     protected function getFormSchema(): array
@@ -73,10 +74,7 @@ class Login extends Component implements HasForms
                 ->email()
                 ->required()
                 ->autocomplete(),
-            TextInput::make('password')
-                ->label(__('filament::login.fields.password.label'))
-                ->password()
-                ->required(),
+
             Checkbox::make('remember')
                 ->label(__('filament::login.fields.remember.label')),
         ];
@@ -84,7 +82,7 @@ class Login extends Component implements HasForms
 
     public function render(): View
     {
-        return view('filament::login')
+        return view('filament-passwordless::login')
             ->layout('filament::components.layouts.card', [
                 'title' => __('filament::login.title'),
             ]);

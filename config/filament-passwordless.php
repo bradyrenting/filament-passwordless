@@ -1,8 +1,7 @@
 <?php
 
 return [
-    /**
-     * The authentication model.
-     */
-    'authenticable_model' => \App\Models\User::class,
+    'authenticatable_model' => \App\Models\User::class,
+
+    'expires_after' => 5,
 ];

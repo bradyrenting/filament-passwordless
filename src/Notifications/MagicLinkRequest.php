@@ -42,7 +42,7 @@ class MagicLinkRequest extends Notification implements ShouldQueue
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $url = (new MagicLink($this->model, $this->remember))->generate();
+        $url = '';
 
         return (new MailMessage)
             ->subject('Your login link')

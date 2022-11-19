@@ -1,0 +1,10 @@
+parameters:
+    ignoreErrors:
+        -
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: src/MagicLink.php
+        -
+            message: "#^Class App\Models\User not found.\\(\\)\\.$#"
+            count: 1
+            path: config/filament-passwordless.php

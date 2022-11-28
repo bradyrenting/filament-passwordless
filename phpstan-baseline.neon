@@ -1,0 +1,10 @@
+parameters:
+    ignoreErrors:
+    -
+        message: "#^Unsafe usage of new static\\(\\)\\.$#"
+        count: 1
+        path: src/MagicLink.php
+    -
+        message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$email\\.$#"
+        count: 2
+        path: src/Http/Livewire/Auth/Login.php

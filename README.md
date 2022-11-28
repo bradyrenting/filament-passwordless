@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bradyrenting/filament-passwordless.svg?style=flat-square)](https://packagist.org/packages/bradyrenting/filament-passwordless)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bradyrenting/filament-passwordless/run-tests?label=tests)](https://github.com/bradyrenting/filament-passwordless/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bradyrenting/filament-passwordless/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bradyrenting/filament-passwordless/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bradyrenting/filament-passwordless/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/bradyrenting/filament-passwordless/actions?query=workflow%3A%22Fix+PHP+code+style+issues%22+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/bradyrenting/filament-passwordless.svg?style=flat-square)](https://packagist.org/packages/bradyrenting/filament-passwordless)
 
 

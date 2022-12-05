@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\URL;
 
 class MagicLink
 {
-    public Model $model;
+    protected Model $model;
 
-    public bool $remember;
+    protected bool $remember;
 
-    public int $expiry;
+    protected int $expiry;
 
-    public string $url;
+    protected string $url;
 
     public static function create(Model $model, bool $remember = false): static
     {

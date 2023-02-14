@@ -15,7 +15,7 @@ jobs:
         os: ubuntu-latest
         php: [8.2, 8.1, '8.0']
         laravel: [10.*, 9.*]
-        dependency-version: [prefer-stable]
+        stability: [prefer-stable]
         include:
           - laravel: 10.*
             testbench: 8.*
@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/support" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests

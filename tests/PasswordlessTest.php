@@ -2,12 +2,21 @@
 
 use BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login;
 use BradyRenting\FilamentPasswordless\Tests\Database\Factories\UserFactory;
+use Filament\Facades\Filament;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 
+beforeEach(function () {
+    $guard = Mockery::mock(Guard::class);
+    $guard->shouldReceive('check')->once()->andReturn(false);
+    Filament::shouldReceive('auth')
+        ->once()
+        ->andReturn($guard);
+});
+
 it('can be mounted', function () {
-    Livewire::test(Login::class)
-        ->assertSuccessful();
+    Livewire::test(Login::class)->assertSuccessful();
 });
 
 it('can submit login form but email does not exist', function () {

@@ -5,7 +5,7 @@ namespace BradyRenting\FilamentPasswordless\Tests;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
-use BradyRenting\FilamentPasswordless\Tests\Models\User;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\Models\User;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
@@ -56,7 +56,7 @@ class TestCase extends Orchestra
 
         config()->set('filament-passwordless.model', User::class);
 
-        $migration = include __DIR__.'/database/migrations/create_test_tables.php.stub';
+        $migration = include __DIR__.'/__mocks__/database/migrations/create_test_tables.php.stub';
         $migration->up();
     }
 }

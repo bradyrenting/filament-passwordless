@@ -4,34 +4,39 @@ namespace BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
 
 use BradyRenting\FilamentPasswordless\FilamentPasswordless;
 use BradyRenting\FilamentPasswordless\MagicLink;
+use Filament\Actions\Action;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Facades\Filament;
-use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Illuminate\Contracts\View\View;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Pages\SimplePage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
-use Livewire\Component;
+use Filament\Pages\Concerns\InteractsWithFormActions;
+use function __;
+use function array_key_exists;
 
 /**
- * @property ComponentContainer $form
+ * @property Form $form
  */
-class Login extends Component implements HasForms
+class Login extends SimplePage
 {
-    use InteractsWithForms;
     use WithRateLimiting;
+    use InteractsWithFormActions;
 
-    public $email = '';
+    public const RATE_LIMIT = 5;
 
-    public $remember = false;
+    protected static string $view = 'filament-passwordless::login';
+
+    public $data = [
+        'email' => '',
+        'remember' => false,
+    ];
 
     public $submitted = false;
-
-    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount(): void
     {
@@ -42,20 +47,14 @@ class Login extends Component implements HasForms
         $this->form->fill();
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function authenticate()
     {
         try {
-            $this->rateLimit(5);
+            $this->rateLimit(self::RATE_LIMIT);
         } catch (TooManyRequestsException $exception) {
-            throw ValidationException::withMessages([
-                'email' => __('filament::login.messages.throttled', [
-                    'seconds' => $exception->secondsUntilAvailable,
-                    'minutes' => ceil($exception->secondsUntilAvailable / 60),
-                ]),
-            ]);
+            $this->getRateLimitedNotification($exception)?->send();
+
+            return null;
         }
 
         $data = $this->form->getState();
@@ -73,25 +72,58 @@ class Login extends Component implements HasForms
         $this->submitted = true;
     }
 
+    protected function getRateLimitedNotification(TooManyRequestsException $exception): ?Notification
+    {
+        return Notification::make()
+            ->title(__('filament-panels::pages/auth/login.notifications.throttled.title', [
+                'seconds' => $exception->secondsUntilAvailable,
+                'minutes' => $exception->minutesUntilAvailable,
+            ]))
+            ->body(array_key_exists(
+                'body',
+                __('filament-panels::pages/auth/login.notifications.throttled') ?: [])
+                ? __(
+                    'filament-panels::pages/auth/login.notifications.throttled.body', [
+                        'seconds' => $exception->secondsUntilAvailable,
+                        'minutes' => $exception->minutesUntilAvailable,
+                    ]
+                ) : null)
+            ->danger();
+    }
+
     protected function getFormSchema(): array
     {
         return [
             TextInput::make('email')
-                ->label(__('filament::login.fields.email.label'))
+                ->label(__('filament-panels::pages/auth/login.form.email.label'))
                 ->email()
                 ->required()
-                ->autocomplete(),
+                ->autocomplete()
+                ->autofocus(),
 
             Checkbox::make('remember')
-                ->label(__('filament::login.fields.remember.label')),
+                ->label(__('filament-panels::pages/auth/login.form.remember.label')),
         ];
     }
 
-    public function render(): View
+    public function form(Form $form): Form
     {
-        return view('filament-passwordless::login')
-            ->layout('filament::components.layouts.card', [
-                'title' => __('filament::login.title'),
-            ]);
+        return $form
+            ->schema($this->getFormSchema())
+            ->statePath('data');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            Action::make('authenticate')
+                ->label(__('filament-panels::pages/auth/login.form.actions.authenticate.label'))
+                ->submit('authenticate'),
+        ];
+    }
+
+    protected function hasFullWidthFormActions(): bool
+    {
+        return true;
     }
 }

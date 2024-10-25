@@ -6,6 +6,7 @@ use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
 use BradyRenting\FilamentPasswordless\Tests\Models\User;
+use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Support\SupportServiceProvider;
@@ -36,6 +37,7 @@ class TestCase extends Orchestra
             BladeIconsServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
             FilamentPasswordlessServiceProvider::class,
+            ActionsServiceProvider::class,
         ];
     }
 

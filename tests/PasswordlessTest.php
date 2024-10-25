@@ -1,6 +1,6 @@
 <?php
 
-use BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\PartialLoginMock as Login;
 use BradyRenting\FilamentPasswordless\Tests\Database\Factories\UserFactory;
 use Filament\Facades\Filament;
 use Illuminate\Contracts\Auth\Guard;
@@ -23,7 +23,7 @@ it('can submit login form but email does not exist', function () {
     Mail::fake();
 
     Livewire::test(Login::class)
-        ->set('email', 'john@example.net')
+        ->set('data.email', 'john@example.net')
         ->call('authenticate')
         ->assertSet('submitted', true)
         ->assertHasNoErrors();
@@ -39,7 +39,7 @@ it('can submit login form and send a magic link', function () {
     Mail::fake();
 
     Livewire::test(Login::class)
-        ->set('email', $user->email)
+        ->set('data.email', $user->email)
         ->call('authenticate')
         ->assertSet('submitted', true)
         ->assertHasNoErrors();
@@ -47,4 +47,17 @@ it('can submit login form and send a magic link', function () {
     $mailableClass = config('filament-passwordless.mailable_for_magic_link');
 
     Mail::assertQueued($mailableClass);
+});
+
+it('shows message about sent link', function () {
+    $user = UserFactory::new()->create();
+
+    Mail::fake();
+
+    Livewire::test(Login::class)
+        ->set('data.email', $user->email)
+        ->call('authenticate')
+        ->assertSet('submitted', true)
+        ->assertHasNoErrors()
+        ->assertSee(__('filament-passwordless::filament-passwordless.messages.magic_link_sent'));
 });

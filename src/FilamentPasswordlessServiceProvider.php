@@ -3,9 +3,9 @@
 namespace BradyRenting\FilamentPasswordless;
 
 use BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentPasswordlessServiceProvider extends PackageServiceProvider
 {

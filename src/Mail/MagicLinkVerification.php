@@ -13,9 +13,7 @@ class MagicLinkVerification extends Mailable implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public string $email, public MagicLink $magicLink)
-    {
-    }
+    public function __construct(public string $email, public MagicLink $magicLink) {}
 
     public function envelope(): Envelope
     {

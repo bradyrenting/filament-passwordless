@@ -4,18 +4,18 @@ namespace BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
 
 use BradyRenting\FilamentPasswordless\FilamentPasswordless;
 use BradyRenting\FilamentPasswordless\MagicLink;
-use Filament\Actions\Action;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\SimplePage;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\ValidationException;
-use Filament\Pages\Concerns\InteractsWithFormActions;
+
 use function __;
 use function array_key_exists;
 
@@ -24,8 +24,8 @@ use function array_key_exists;
  */
 class Login extends SimplePage
 {
-    use WithRateLimiting;
     use InteractsWithFormActions;
+    use WithRateLimiting;
 
     public const RATE_LIMIT = 5;
 

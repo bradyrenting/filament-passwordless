@@ -1,6 +1,6 @@
 <?php
 
-use BradyRenting\FilamentPasswordless\Tests\__mocks__\PartialLoginMock as Login;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\src\Http\Livewire\Auth\Login;
 use BradyRenting\FilamentPasswordless\Tests\Database\Factories\UserFactory;
 use Filament\Facades\Filament;
 use Illuminate\Contracts\Auth\Guard;

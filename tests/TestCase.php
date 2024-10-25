@@ -21,23 +21,31 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+        $this->withoutExceptionHandling();
+
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'BradyRenting\\FilamentPasswordless\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        // This call is needed as the capture directive is not loaded in the test environment which results in the
+        // $content variable holding a closure being null
+        $this->app['view']->prependNamespace('filament-forms', [
+            __DIR__.'/__mocks__/resources/views/vendor/filament/forms',
+        ]);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LivewireServiceProvider::class,
             SupportServiceProvider::class,
+            LivewireServiceProvider::class,
             FilamentServiceProvider::class,
             FormsServiceProvider::class,
             TablesServiceProvider::class,
             BladeIconsServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
-            FilamentPasswordlessServiceProvider::class,
             ActionsServiceProvider::class,
+            FilamentPasswordlessServiceProvider::class,
         ];
     }
 

@@ -27,7 +27,6 @@ class TestCase extends Orchestra
             fn (string $modelName) => 'BradyRenting\\FilamentPasswordless\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
 
-        $this->artisan('view:clear');
         // This call is needed as the capture directive is not loaded in the test environment which results in the
         // $content variable holding a closure being null
         $this->app['view']->prependNamespace('filament-forms', [

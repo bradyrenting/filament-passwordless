@@ -91,25 +91,20 @@ class Login extends SimplePage
             ->danger();
     }
 
-    protected function getFormSchema(): array
-    {
-        return [
-            TextInput::make('email')
-                ->label(__('filament-panels::pages/auth/login.form.email.label'))
-                ->email()
-                ->required()
-                ->autocomplete()
-                ->autofocus(),
-
-            Checkbox::make('remember')
-                ->label(__('filament-panels::pages/auth/login.form.remember.label')),
-        ];
-    }
-
     public function form(Form $form): Form
     {
         return $form
-            ->schema($this->getFormSchema())
+            ->schema([
+                TextInput::make('email')
+                    ->label(__('filament-panels::pages/auth/login.form.email.label'))
+                    ->email()
+                    ->required()
+                    ->autocomplete()
+                    ->autofocus(),
+
+                Checkbox::make('remember')
+                    ->label(__('filament-panels::pages/auth/login.form.remember.label')),
+            ])
             ->statePath('data');
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 use BradyRenting\FilamentPasswordless\MagicLink;
-use BradyRenting\FilamentPasswordless\Tests\Database\Factories\UserFactory;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\database\factories\UserFactory;
 use Carbon\Carbon;
 
 test('it can generate a magic link', function () {
@@ -25,10 +25,7 @@ test('it can generate a magic link with configurable expiration', function () {
         remember: true
     );
 
-    expect($magicLink->getExpiry())->toBe(now()
-        ->addMinutes(config('filament-passwordless.magic_link_expiry'))
-        ->diffInMinutes()
-    );
+    expect($magicLink->getExpiry())->toBe(config('filament-passwordless.magic_link_expiry'));
 });
 
 test('it can generate a magic link with the route model key', function () {

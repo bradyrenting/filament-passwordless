@@ -1,9 +1,10 @@
 <?php
 
-namespace BradyRenting\FilamentPasswordless\Tests\Models;
+namespace BradyRenting\FilamentPasswordless\Tests\__mocks__\Models;
 
-use BradyRenting\FilamentPasswordless\Tests\Database\Factories\UserFactory;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\database\factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -21,6 +22,11 @@ class User extends Authenticatable implements FilamentUser
     }
 
     public function canAccessFilament(): bool
+    {
+        return true;
+    }
+
+    public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }

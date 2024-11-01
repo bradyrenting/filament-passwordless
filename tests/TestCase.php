@@ -5,7 +5,8 @@ namespace BradyRenting\FilamentPasswordless\Tests;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
-use BradyRenting\FilamentPasswordless\Tests\Models\User;
+use BradyRenting\FilamentPasswordless\Tests\__mocks__\Models\User;
+use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Support\SupportServiceProvider;
@@ -20,21 +21,30 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+        $this->withoutExceptionHandling();
+
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'BradyRenting\\FilamentPasswordless\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        // This call is needed as the capture directive is not loaded in the test environment which results in the
+        // $content variable holding a closure being null
+        $this->app['view']->prependNamespace('filament-forms', [
+            __DIR__.'/__mocks__/resources/views/vendor/filament/forms',
+        ]);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LivewireServiceProvider::class,
             SupportServiceProvider::class,
+            LivewireServiceProvider::class,
             FilamentServiceProvider::class,
             FormsServiceProvider::class,
             TablesServiceProvider::class,
             BladeIconsServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
+            ActionsServiceProvider::class,
             FilamentPasswordlessServiceProvider::class,
         ];
     }
@@ -46,7 +56,7 @@ class TestCase extends Orchestra
 
         config()->set('filament-passwordless.model', User::class);
 
-        $migration = include __DIR__.'/database/migrations/create_test_tables.php.stub';
+        $migration = include __DIR__.'/__mocks__/database/migrations/create_test_tables.php.stub';
         $migration->up();
     }
 }

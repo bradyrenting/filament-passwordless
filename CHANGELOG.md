@@ -2,6 +2,18 @@
 
 All notable changes to `filament-passwordless` will be documented in this file.
 
+## 2.0.0 - 2024-11-01
+
+### What's Changed
+
+* Update to Laravel 11 and Filament 3 by @sWalbrun in https://github.com/bradyrenting/filament-passwordless/pull/13
+
+### New Contributors
+
+* @sWalbrun made their first contribution in https://github.com/bradyrenting/filament-passwordless/pull/13
+
+**Full Changelog**: https://github.com/bradyrenting/filament-passwordless/compare/1.1.1...2.0.0
+
 ## 1.1.1 - 2023-07-05
 
 ### What's Changed

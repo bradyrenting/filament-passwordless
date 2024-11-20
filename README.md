@@ -7,7 +7,7 @@
 
 
 
-Filament Passwordless is a package for [Filament](https://filamentadmin.com/) that allows users to login without a password.
+Filament Passwordless is a package for [Filament](https://filamentphp.com/) that allows users to login without a password.
 
 ## Installation
 

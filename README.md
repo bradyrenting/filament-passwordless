@@ -34,7 +34,7 @@ php artisan vendor:publish --tag="filament-passwordless-views"
 Register the plugin in your Filament panel provider (the default filename is `app/Providers/Filament/AdminPanelProvider.php`):
 
 ```php
-use use BradyRenting\FilamentPasswordless\FilamentPasswordlessPlugin;
+use BradyRenting\FilamentPasswordless\FilamentPasswordlessPlugin;
 
 // ...
 

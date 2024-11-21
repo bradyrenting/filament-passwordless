@@ -11,6 +11,11 @@ class FilamentPasswordlessPlugin implements Plugin
 {
     protected string $model;
 
+    public function __construct()
+    {
+        $this->model = config('filament-passwordless.model');
+    }
+
     public static function make(): static
     {
         return app(static::class);
@@ -30,7 +35,7 @@ class FilamentPasswordlessPlugin implements Plugin
  
     public function boot(Panel $panel): void
     {
-        $this->model = config('filament-passwordless.model');
+        //
     }
 
     public function getModel(string $email): ?Authenticatable

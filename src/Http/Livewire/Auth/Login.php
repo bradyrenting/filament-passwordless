@@ -2,7 +2,7 @@
 
 namespace BradyRenting\FilamentPasswordless\Http\Livewire\Auth;
 
-use BradyRenting\FilamentPasswordless\FilamentPasswordless;
+use BradyRenting\FilamentPasswordless\FilamentPasswordlessPlugin;
 use BradyRenting\FilamentPasswordless\MagicLink;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
@@ -59,7 +59,7 @@ class Login extends SimplePage
 
         $data = $this->form->getState();
 
-        $model = app(FilamentPasswordless::class)->getModel($data['email']);
+        $model = app(FilamentPasswordlessPlugin::class)->getModel($data['email']);
 
         if (! is_null($model)) {
             $magicLink = MagicLink::create($model, $data['remember']);

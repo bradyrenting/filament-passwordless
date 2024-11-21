@@ -11,6 +11,11 @@ class FilamentPasswordlessPlugin implements Plugin
 {
     protected string $model;
 
+    public static function make(): static
+    {
+        return app(static::class);
+    }
+
     public function getId(): string
     {
         return 'filament-passwordless';

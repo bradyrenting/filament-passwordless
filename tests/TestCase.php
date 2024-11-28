@@ -10,6 +10,8 @@ use Filament\Facades\Filament;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Panel;
+use Filament\Support\SupportServiceProvider;
+use Filament\Tables\TablesServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Session\Middleware\StartSession;
@@ -58,6 +60,8 @@ class TestCase extends Orchestra
             LivewireServiceProvider::class,
             ActionsServiceProvider::class,
             FormsServiceProvider::class,
+            SupportServiceProvider::class,
+            TablesServiceProvider::class,
         ];
     }
 

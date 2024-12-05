@@ -5,7 +5,7 @@ namespace BradyRenting\FilamentPasswordless;
 use BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable;
  
 class FilamentPasswordlessPlugin implements Plugin
 {

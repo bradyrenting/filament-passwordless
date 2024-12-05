@@ -29,7 +29,6 @@ class FilamentPasswordlessPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel
-            ->authGuard(env('FILAMENT_AUTH_GUARD', 'web'))
             ->login(Login::class);
     }
  

@@ -9,9 +9,9 @@ You can use this link only once, and it expires after {{ $expiry }} minutes.
     Verify and login
 </x-mail::button>
 
-Incase you did not request this verification email, you can ignore it.
+In case you did not request this verification email, you can ignore it.
 
-If the button does not appear [Use this link instead]({{ $url }}).
+If the button does not appear [use this link instead]({{ $url }}).
 
 Thanks,<br>
 {{ config('app.name') }}

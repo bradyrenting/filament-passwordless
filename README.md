@@ -7,7 +7,7 @@
 
 
 
-Filament Passwordless is a package for [Filament](https://filamentadmin.com/) that allows users to login without a password.
+Filament Passwordless is a package for [Filament](https://filamentphp.com/) that allows users to login without a password.
 
 ## Installation
 
@@ -31,16 +31,19 @@ php artisan vendor:publish --tag="filament-passwordless-views"
 
 ## Usage
 
-In your `config/filament.php` config, replace the default Login page with `\BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login::class`.
+Register the plugin in your Filament panel provider (the default filename is `app/Providers/Filament/AdminPanelProvider.php`):
 
 ```php
-'auth' => [
-    'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
-    'pages' => [
-        'login' => \BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login::class,
-    ],
-],
+use BradyRenting\FilamentPasswordless\FilamentPasswordlessPlugin;
+
+// ...
+
+    return $panel
+        ->plugin(FilamentPasswordlessPlugin::make())
+// ...
 ```
+
+Note that you can remove any existing call to `->login()` in the panel's configuration because it will be provided by this plugin.
 
 ## Testing
 
@@ -67,4 +70,4 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE](LICENSE.md) for more information.

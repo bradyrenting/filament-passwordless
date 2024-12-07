@@ -2,16 +2,19 @@
 
 namespace BradyRenting\FilamentPasswordless\Tests;
 
-use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
-use BladeUI\Icons\BladeIconsServiceProvider;
+use BradyRenting\FilamentPasswordless\FilamentPasswordlessPlugin;
 use BradyRenting\FilamentPasswordless\FilamentPasswordlessServiceProvider;
 use BradyRenting\FilamentPasswordless\Tests\__mocks__\Models\User;
 use Filament\Actions\ActionsServiceProvider;
+use Filament\Facades\Filament;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
+use Filament\Panel;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Session\Middleware\StartSession;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -27,6 +30,8 @@ class TestCase extends Orchestra
             fn (string $modelName) => 'BradyRenting\\FilamentPasswordless\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
 
+        $this->app?->make(Kernel::class)->pushMiddleware(StartSession::class);
+
         // This call is needed as the capture directive is not loaded in the test environment which results in the
         // $content variable holding a closure being null
         $this->app['view']->prependNamespace('filament-forms', [
@@ -34,18 +39,29 @@ class TestCase extends Orchestra
         ]);
     }
 
+    protected function registerTestPanel(): void
+    {
+        Filament::registerPanel(
+            fn (): Panel => Panel::make()
+                ->default()
+                ->id('test')
+                ->path('test')
+                ->plugin(FilamentPasswordlessPlugin::make()),
+        );
+    }
+
     protected function getPackageProviders($app)
     {
+        $this->registerTestPanel();
+
         return [
-            SupportServiceProvider::class,
-            LivewireServiceProvider::class,
             FilamentServiceProvider::class,
-            FormsServiceProvider::class,
-            TablesServiceProvider::class,
-            BladeIconsServiceProvider::class,
-            BladeHeroiconsServiceProvider::class,
-            ActionsServiceProvider::class,
             FilamentPasswordlessServiceProvider::class,
+            LivewireServiceProvider::class,
+            ActionsServiceProvider::class,
+            FormsServiceProvider::class,
+            SupportServiceProvider::class,
+            TablesServiceProvider::class,
         ];
     }
 

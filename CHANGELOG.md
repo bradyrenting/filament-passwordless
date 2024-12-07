@@ -2,6 +2,18 @@
 
 All notable changes to `filament-passwordless` will be documented in this file.
 
+## 2.1.0 - 2024-12-07
+
+### What's Changed
+
+* Fix Filament 3 implementation by @nicgordon in https://github.com/bradyrenting/filament-passwordless/pull/14
+
+### New Contributors
+
+* @nicgordon made their first contribution in https://github.com/bradyrenting/filament-passwordless/pull/14
+
+**Full Changelog**: https://github.com/bradyrenting/filament-passwordless/compare/2.0.0...2.1.0
+
 ## 2.0.0 - 2024-11-01
 
 ### What's Changed

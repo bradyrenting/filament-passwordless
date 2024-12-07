@@ -1,12 +1,12 @@
 <?php
- 
+
 namespace BradyRenting\FilamentPasswordless;
- 
+
 use BradyRenting\FilamentPasswordless\Http\Livewire\Auth\Login;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\Authenticatable;
- 
+
 class FilamentPasswordlessPlugin implements Plugin
 {
     protected string $model;
@@ -25,13 +25,13 @@ class FilamentPasswordlessPlugin implements Plugin
     {
         return 'filament-passwordless';
     }
- 
+
     public function register(Panel $panel): void
     {
         $panel
             ->login(Login::class);
     }
- 
+
     public function boot(Panel $panel): void
     {
         //

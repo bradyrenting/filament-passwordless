@@ -1,8 +1,8 @@
 <?php
 
 use BradyRenting\FilamentPasswordless\Http\Controllers\HandleMagicLinkController;
-use Illuminate\Support\Facades\Route;
 use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Route;
 
 foreach (Filament::getPanels() as $panel) {
     if (! $panel->hasPlugin('filament-passwordless')) {

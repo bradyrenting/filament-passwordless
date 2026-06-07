@@ -2,6 +2,20 @@
 
 All notable changes to `filament-passwordless` will be documented in this file.
 
+## 2.3.0 - 2026-06-07
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/bradyrenting/filament-passwordless/pull/20
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/bradyrenting/filament-passwordless/pull/25
+* Adds Laravel v12 support by @KSneijders in https://github.com/bradyrenting/filament-passwordless/pull/21
+
+### New Contributors
+
+* @KSneijders made their first contribution in https://github.com/bradyrenting/filament-passwordless/pull/21
+
+**Full Changelog**: https://github.com/bradyrenting/filament-passwordless/compare/2.2.0...2.3.0
+
 ## 2.2.0 - 2025-06-10
 
 ### What's Changed

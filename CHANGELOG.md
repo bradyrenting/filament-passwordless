@@ -2,6 +2,10 @@
 
 All notable changes to `filament-passwordless` will be documented in this file.
 
+## 2.3.1 - 2026-06-16
+
+**Full Changelog**: https://github.com/bradyrenting/filament-passwordless/compare/2.3.0...2.3.1
+
 ## 2.3.0 - 2026-06-07
 
 ### What's Changed
